@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
-ENV NGINX_VERSION 1.6.3
-ENV PSM_VERSION 0.4.1
+ENV NGINX_VERSION 1.10.1
+ENV PSM_VERSION 0.5.2
 
 RUN apt-get update && apt-get install -y python wget software-properties-common
 
@@ -12,7 +12,8 @@ RUN add-apt-repository -y -s ppa:nginx/stable && apt-get update && \
 WORKDIR /nginx-${NGINX_VERSION}
 
 RUN mv debian/rules  debian/rules.orig && \
-    awk '/\t\t\t--add-module=\$\(MODULESDIR\)\/nginx-upstream-fair/ { print; print "\t\t\t--add-module=$(MODULESDIR)/nginx-push-stream-module \\"; next }1' debian/rules.orig > debian/rules
+    awk '/\t\t\t--add-dynamic-module=\$\(MODULESDIR\)\/nginx-upstream-fair/ { print; print "\t\t\t--add-module=$(MODULESDIR)/nginx-push-stream-module \\"; next }1' debian/rules.orig > debian/rules && \
+    grep "nginx-push-stream-module" debian/rules
 
 RUN wget -q https://github.com/wandenberg/nginx-push-stream-module/archive/${PSM_VERSION}.tar.gz && \
     tar xzf ${PSM_VERSION}.tar.gz && \

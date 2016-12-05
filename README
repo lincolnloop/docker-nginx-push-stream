@@ -1,1 +1,4 @@
 Build Nginx with the push stream module on Ubuntu 14.04 and upload to S3
+
+    docker build -t nginx_psm .
+    docker run --rm -e S3_BUCKET=your-bucket -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY nginx_psm
