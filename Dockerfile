@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
-ENV NGINX_VERSION 1.10.1
-ENV PSM_VERSION 0.5.2
+ENV NGINX_VERSION 1.12.1
+ENV PSM_VERSION 0.5.4
 
 RUN apt-get update && apt-get install -y python wget software-properties-common
 
